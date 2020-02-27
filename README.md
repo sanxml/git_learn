@@ -1,7 +1,7 @@
 ## git_test
-#### 用于学习使用git
+### 用于学习使用git
 
-###### 基本指令
+#### 基本指令
 
 git add 添加进仓库
 
@@ -15,7 +15,7 @@ git reflog 查看历史记录
 
 git reset 恢复到某个版本（git reset --hard）
 
-###### 线上仓库指令
+#### 线上仓库指令
 
 git clone 克隆线上仓库到一个新目录（http协议或者ssh协议）
 
@@ -27,7 +27,7 @@ ssh-keygen -t rsa -C "sanxml@foxmail.com" 创建公钥
 
 复制 ~/.ssh/id_rsa.pub 到github，上传公钥
 
-###### 分支操作
+#### 分支操作
 
 git branch 查看分支
 
