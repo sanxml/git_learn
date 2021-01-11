@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>介绍说明 · GitBook</title>
+        <title>学习使用gitbook · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="learn_git.html" />
+    <link rel="next" href="pull_request.html" />
     
+    
+    <link rel="prev" href="learn_github.html" />
     
 
     </head>
@@ -87,7 +89,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -126,7 +128,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="learn_gitbook.html">
+        <li class="chapter active" data-level="1.4" data-path="learn_gitbook.html">
             
                 <a href="learn_gitbook.html">
             
@@ -182,7 +184,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >介绍说明</a>
+        <a href="." >学习使用gitbook</a>
     </h1>
 </div>
 
@@ -197,7 +199,26 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>&#x672C;&#x6587;&#x6863;&#x662F;&#x7528;&#x6765;&#x5B66;&#x4E60;git&#x548C;&#x76F8;&#x5173;&#x4EA7;&#x54C1;&#x7684;&#x3002;</p>
+                                <h1 id="&#x5B66;&#x4E60;&#x4F7F;&#x7528;gitbook">&#x5B66;&#x4E60;&#x4F7F;&#x7528;gitbook</h1>
+<h3 id="1-&#x521D;&#x59CB;&#x5316;gitbook">1. &#x521D;&#x59CB;&#x5316;gitbook</h3>
+<pre><code class="lang-shell">gitbook init
+</code></pre>
+<p>&#x591A;&#x51FA;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;README.md&#x4E3A;&#x4ECB;&#x7ECD;&#x6587;&#x4EF6;&#xFF0C;SUMMARY.md&#x4E3A;&#x7AE0;&#x8282;&#x76EE;&#x5F55;&#x6587;&#x4EF6;</p>
+<p><img src="assets/gitbook_init.png" alt="&#x521D;&#x59CB;&#x5316;gitbook"></p>
+<h3 id="2-&#x7F16;&#x8F91;summarymd">2. &#x7F16;&#x8F91;SUMMARY.md</h3>
+<p><img src="assets/SUMMARY.png" alt="&#x7F16;&#x8F91;SUMMARY.md"></p>
+<p>&#x7F16;&#x8F91;&#x540E;&#x8FD8;&#x9700;&#x8981;&#x91CD;&#x65B0;<code>gitbook init</code></p>
+<h3 id="3-&#x542F;&#x52A8;&#x670D;&#x52A1;&#xFF0C;&#x9884;&#x89C8;">3. &#x542F;&#x52A8;&#x670D;&#x52A1;&#xFF0C;&#x9884;&#x89C8;</h3>
+<pre><code class="lang-shell">gitbook serve
+</code></pre>
+<p><img src="assets/gitbook_serve.png" alt="gitbook serve"></p>
+<blockquote>
+<p>&#x6253;&#x5F00; <a href="http://localhost:4000" target="_blank">http://localhost:4000</a> &#x9884;&#x89C8;</p>
+</blockquote>
+<p><img src="assets/gitbook_serve2.png" alt="gitbook serve2"></p>
+<h3 id="4-&#x751F;&#x6210;&#x9759;&#x6001;&#x7F51;&#x9875;">4. &#x751F;&#x6210;&#x9759;&#x6001;&#x7F51;&#x9875;</h3>
+<pre><code class="lang-shell">gitbook build
+</code></pre>
 
                                 
                                 </section>
@@ -225,8 +246,12 @@
 
             
                 
+                <a href="learn_github.html" class="navigation navigation-prev " aria-label="Previous page: 学习使用github">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="learn_git.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 学习使用git">
+                
+                <a href="pull_request.html" class="navigation navigation-next " aria-label="Next page: 对开源仓库提交PR">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -237,7 +262,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"介绍说明","level":"1.1","depth":1,"next":{"title":"学习使用git","level":"1.2","depth":1,"path":"learn_git.md","ref":"learn_git.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2021-01-11T11:43:47.293Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-11T11:44:46.011Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"学习使用gitbook","level":"1.4","depth":1,"next":{"title":"对开源仓库提交PR","level":"1.5","depth":1,"path":"pull_request.md","ref":"pull_request.md","articles":[]},"previous":{"title":"学习使用github","level":"1.3","depth":1,"path":"learn_github.md","ref":"learn_github.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"learn_gitbook.md","mtime":"2021-01-11T11:42:24.781Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-11T11:44:46.011Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

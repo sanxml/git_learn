@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>介绍说明 · GitBook</title>
+        <title>学习使用git · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="learn_git.html" />
+    <link rel="next" href="learn_github.html" />
     
+    
+    <link rel="prev" href="./" />
     
 
     </head>
@@ -87,7 +89,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -100,7 +102,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="learn_git.html">
+        <li class="chapter active" data-level="1.2" data-path="learn_git.html">
             
                 <a href="learn_git.html">
             
@@ -182,7 +184,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >介绍说明</a>
+        <a href="." >学习使用git</a>
     </h1>
 </div>
 
@@ -197,7 +199,53 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>&#x672C;&#x6587;&#x6863;&#x662F;&#x7528;&#x6765;&#x5B66;&#x4E60;git&#x548C;&#x76F8;&#x5173;&#x4EA7;&#x54C1;&#x7684;&#x3002;</p>
+                                <h1 id="&#x5B66;&#x4E60;&#x4F7F;&#x7528;git">&#x5B66;&#x4E60;&#x4F7F;&#x7528;git</h1>
+<h2 id="&#x57FA;&#x672C;&#x6307;&#x4EE4;">&#x57FA;&#x672C;&#x6307;&#x4EE4;</h2>
+<pre><code class="lang-shell">git add //&#x6DFB;&#x52A0;&#x8FDB;&#x4ED3;&#x5E93;
+
+git commit -m //&#x6DFB;&#x52A0;&#x4FEE;&#x6539;&#x4E86;&#x54EA;&#x4E9B;&#x5185;&#x5BB9;
+
+git status //&#x663E;&#x793A;&#x5DE5;&#x4F5C;&#x533A;&#x72B6;&#x6001;
+
+git log //&#x67E5;&#x770B;&#x65E5;&#x5FD7;&#xFF08;git log --pretty=oneline&#xFF09;
+
+git reflog //&#x67E5;&#x770B;&#x5386;&#x53F2;&#x8BB0;&#x5F55;
+
+git reset //&#x6062;&#x590D;&#x5230;&#x67D0;&#x4E2A;&#x7248;&#x672C;&#xFF08;git reset --hard&#xFF09;
+</code></pre>
+<h2 id="&#x7EBF;&#x4E0A;&#x4ED3;&#x5E93;&#x6307;&#x4EE4;">&#x7EBF;&#x4E0A;&#x4ED3;&#x5E93;&#x6307;&#x4EE4;</h2>
+<pre><code class="lang-shell">git clone //&#x514B;&#x9686;&#x7EBF;&#x4E0A;&#x4ED3;&#x5E93;&#x5230;&#x4E00;&#x4E2A;&#x65B0;&#x76EE;&#x5F55;&#xFF08;http&#x534F;&#x8BAE;&#x6216;&#x8005;ssh&#x534F;&#x8BAE;&#xFF09;
+
+git push //&#x63D0;&#x4EA4;&#x5230;&#x7EBF;&#x4E0A;&#x4ED3;&#x5E93;&#x7684;&#x64CD;&#x4F5C;&#xFF08;&#x4FEE;&#x6539;&#x6743;&#x9650;&#xFF0C;&#x5728;.git/config&#x91CC;http://&#x8D26;&#x53F7;&#xFF1A;&#x5BC6;&#x7801;@github.com&#xFF09;
+
+git pull //&#x62C9;&#x53D6;&#x7EBF;&#x4E0A;&#x4ED3;&#x5E93;&#x5230;&#x672C;&#x5730;
+
+ssh-keygen -t rsa -C &quot;sanxml@foxmail.com&quot;
+//&#x521B;&#x5EFA;&#x516C;&#x94A5;&#x590D;&#x5236; ~/.ssh/id_rsa.pub &#x5230;github&#xFF0C;&#x4E0A;&#x4F20;&#x516C;&#x94A5;
+</code></pre>
+<h2 id="&#x5206;&#x652F;&#x64CD;&#x4F5C;">&#x5206;&#x652F;&#x64CD;&#x4F5C;</h2>
+<pre><code class="lang-shell">git branch //&#x67E5;&#x770B;&#x5206;&#x652F;
+
+git branch //&#x5206;&#x652F;&#x540D; &#x6DFB;&#x52A0;&#x5206;&#x652F;
+
+git checkout //&#x5206;&#x77E5;&#x540D; &#x5207;&#x6362;&#x5206;&#x652F;
+
+git branch -d //&#x5220;&#x9664;&#x5206;&#x652F;
+
+git merge //&#x5206;&#x652F;&#x540D; &#x5408;&#x5E76;&#x5206;&#x652F;
+</code></pre>
+<pre><code class="lang-shell">git config --global user.name &lt;your name&gt; //&#x8BBE;&#x7F6E;&#x7528;&#x6237;&#x540D;
+git config --global user.email &lt;your_email@example.com&gt; //&#x8BBE;&#x7F6E;&#x90AE;&#x7BB1;
+</code></pre>
+<h2 id="&#x5FFD;&#x7565;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;">&#x5FFD;&#x7565;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;</h2>
+<blockquote>
+<p>&#x65B0;&#x5EFA;.gitignore&#xFF0C;&#x7F16;&#x5199;&#x89C4;&#x5219;</p>
+<p>&#x5FFD;&#x7565;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;&#xFF0C;&#x5E38;&#x7528;&#x4E8E;&#x4E0D;&#x505A;&#x66F4;&#x6539;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x56FE;&#x7247;&#x7B49;</p>
+</blockquote>
+<h2 id="&#x67E5;&#x770B;&#x5E2E;&#x52A9;">&#x67E5;&#x770B;&#x5E2E;&#x52A9;</h2>
+<blockquote>
+<p><code>git --help</code> &#x67E5;&#x770B;&#x5E2E;&#x52A9;</p>
+</blockquote>
 
                                 
                                 </section>
@@ -225,8 +273,12 @@
 
             
                 
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 介绍说明">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="learn_git.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 学习使用git">
+                
+                <a href="learn_github.html" class="navigation navigation-next " aria-label="Next page: 学习使用github">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -237,7 +289,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"介绍说明","level":"1.1","depth":1,"next":{"title":"学习使用git","level":"1.2","depth":1,"path":"learn_git.md","ref":"learn_git.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2021-01-11T11:43:47.293Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-11T11:44:46.011Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"学习使用git","level":"1.2","depth":1,"next":{"title":"学习使用github","level":"1.3","depth":1,"path":"learn_github.md","ref":"learn_github.md","articles":[]},"previous":{"title":"介绍说明","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"learn_git.md","mtime":"2021-01-11T11:41:48.330Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-01-11T11:44:46.011Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
