@@ -1,1 +1,0 @@
-cmd_/run/media/sanxml/ubuntu/GitHub/sanxml/learn/character_device_drivers_demo/chrdevbase.mod := { echo  /run/media/sanxml/ubuntu/GitHub/sanxml/learn/character_device_drivers_demo/chrdevbase.o; echo; } > /run/media/sanxml/ubuntu/GitHub/sanxml/learn/character_device_drivers_demo/chrdevbase.mod
