@@ -1,6 +1,6 @@
 # 对开源仓库提交PR
 
-### fork
+## fork
 
 选择自己想要的开源项目，fork到自己的仓库
 ![fork](./assets/fork.png)
@@ -18,13 +18,13 @@ git remove -v                               //查看连接
 
 ![clone](./assets/clone.png)
 
-### 创建分支
+## 创建分支
 
 ``` shell
 git checkout -b XXX         //创建分支
 ```
 
-### 修改代码并提交
+## 修改代码并提交
 
 ``` shell
 git add XXX             // 添加修改
@@ -32,7 +32,7 @@ git commit -m "修改了XXX"     // 添加修改文档
 git push origin master       // 提交修改
 ```
 
-### 提交PR
+## 提交PR
 
 在GitHub上找到fork的仓库，找到 New pull request
 ![clone](./assets/new_pull_request.png)

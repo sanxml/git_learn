@@ -11,4 +11,3 @@
 * 实战篇
   * ARM linux 驱动开发
     * [字符设备驱动开发](develop_character_device_drivers.md)
-

@@ -1,10 +1,11 @@
 # 学习使用gitbook
 
-### 1. 初始化gitbook
+## 1. 初始化gitbook
 
 ``` shell
 gitbook init
 ```
+
 多出两个文件，README.md为介绍文件，SUMMARY.md为章节目录文件
 
 ![初始化gitbook](./assets/gitbook_init.png)
@@ -20,9 +21,10 @@ gitbook init
 ``` shell
 gitbook serve
 ```
+
 ![gitbook serve](./assets/gitbook_serve.png)
 
-> 打开 http://localhost:4000 预览
+> 打开 [http://localhost:4000](http://localhost:4000) 预览
 
 ![gitbook serve2](./assets/gitbook_serve2.png)
 

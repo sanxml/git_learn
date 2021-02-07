@@ -1,6 +1,6 @@
 # 学习使用docker
 
-### **什么是docker？**
+## **什么是docker？**
 
 Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从 Apache2.0 协议开源。
 
@@ -10,9 +10,10 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 
 `简单的说，使用docker，可以跳过环境搭建等等，可以快速上手licheepi-nano`
 
-### **docker的基本指令**
+## **docker的基本指令**
 
 - 镜像操作
+
 ```shell
 docker push [OPTIONS] NAME[:TAG]  # 获取镜像
 docker images             # 列出镜像
@@ -21,6 +22,7 @@ docker rmi [OPTIONS] IMAGE [IMAGE...] #删除镜像
 ```
 
 - 容器操作
+
 ```shell
 docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...] # 通过镜像启动一个新的容器
 docker ps -a # 查看所有容器
@@ -34,6 +36,7 @@ docker rm [OPTIONS] CONTAINER [CONTAINER...] # 删除容器
 > docker run -t -i --privileged -v /dev/bus/usb:/dev/bus/usb ubuntu bash
 
 - 仓库操作
+
 ```shell
 docker login [OPTIONS] [SERVER] # 登录docker hub
 docker logout [OPTIONS] [SERVER] # 退出docker hub
