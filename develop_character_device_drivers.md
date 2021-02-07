@@ -182,7 +182,6 @@ LCD 等等都是字符设备，这些设备的驱动就叫做字符设备驱动�
     测试与结果如下所示
 
     ``` shell
-
     # ./chrdevbaseApp /dev/chrdevbase 1
     [ 2284.067808] kernel senddata ok!
     read data:kernel data!
@@ -190,5 +189,4 @@ LCD 等等都是字符设备，这些设备的驱动就叫做字符设备驱动�
     # ./chrdevbaseApp /dev/chrdevbase 2
     [ 2288.015031] kernel recevdata ok!
     write data:usr data!
-
     ```

@@ -1,6 +1,6 @@
 KERNELDIR := /run/media/sanxml/ubuntu/GitHub/Lichee-Pi/buildroot-licheepi/output/build/linux-5.4.77
 CURRENT_PATH := $(shell pwd)
-obj-m := led_chrdev.o
+obj-m := led_newchrdev.o
 
 
 build: kernel_modules
