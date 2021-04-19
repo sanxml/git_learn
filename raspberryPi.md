@@ -2,30 +2,29 @@
 
 ## 烧录镜像
 
-1. 下载烧录软件（[balenaEtcher](https://www.balena.io/etcher/)）
+### 1. 下载烧录软件（[balenaEtcher](https://www.balena.io/etcher/)）
 
-![](assets/raspberryPi/balena.png)
+![balenaEtcher软件](assets/raspberryPi/balena.png)
 
-2. 下载树莓派镜像([下载地址](https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit))
+### 2. 下载树莓派镜像([下载地址](https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit))
 
-![](assets/raspberryPi/raspberryPi-os.png)
+![树莓派镜像](assets/raspberryPi/raspberryPi-os.png)
 
-3. 插入sd卡，打开balenaEtcher,分别选择 `解压好的镜像(.img后缀文件)` 和 `sd卡 `，点击开始烧录镜像
+### 3. 插入sd卡，打开balenaEtcher,分别选择 `解压好的镜像(.img后缀文件)` 和 `sd` 卡 ，点击开始烧录镜像
 
-![](assets/raspberryPi/balena_1.png)
+![烧录镜像1](assets/raspberryPi/balena_1.png)
 
 等待几分钟。。。
 
-![](assets/raspberryPi/balena_2.png)
+![烧录镜像2](assets/raspberryPi/balena_2.png)
 
-4. 打开 `boot` 文件夹，添加 `wpa_supplicant.conf` 文件，树莓派启动后会自行读取 `wpa_supplicant.conf` 配置文件连接 WiFi 设备。
+### 4. 打开 `boot` 文件夹，添加 `wpa_supplicant.conf` 文件，树莓派启动后会自行读取 `wpa_supplicant.conf` 配置文件连接 WiFi 设备
 
-![](assets/raspberryPi/wpa.png)
+![添加wpa_supplicant.conf文件](assets/raspberryPi/wpa.png)
 
 在`wpa_supplicant.conf` 文件中写入以下内容，ssid 为 wifi 名称， psk 为 wifi 密码。
 
-
-```
+``` shell
 country=CN
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
@@ -46,62 +45,62 @@ scan_ssid=1
 }
 ```
 
-![](assets/raspberryPi/wpa_1.png)
+![wpa_supplicant.conf文件内容](assets/raspberryPi/wpa_1.png)
 
+### 5. 打开`boot`文件，添加 `ssh` 空文件,树莓派启动后就会开启 ssh 服务
 
-5. 打开`boot`文件，添加 `ssh` 空文件,树莓派启动后就会开启 ssh 服务
-
-![](assets/raspberryPi/ssh.png)
-
+![添加ssh文件](assets/raspberryPi/ssh.png)
 
 ## 搭建 vscode 编辑树莓派的环境
 
-1. 将sd卡插入树莓派,启动树莓派。
+### 1. 将sd卡插入树莓派,启动树莓派
 
-2. 获得树莓派ip地址
+### 2. 获得树莓派ip地址
 
-    * 登录路由器管理界面查看,这里使用的是 tp-link 路由器,地址为 [192.168.1.1](192.168.1.1)
+- 登录路由器管理界面查看,这里使用的是 tp-link 路由器,地址为 [192.168.1.1](192.168.1.1)
 
-    ![](assets/raspberryPi/ip.png)
+![路由器ip地址](assets/raspberryPi/ip.png)
 
-    * linux 系统使用 `nmap` 工具,这里的系统为 manjaro ,下面介绍 `nmap` 工具安装和使用
+- linux 系统使用 `nmap` 工具,这里的系统为 manjaro ,下面介绍 `nmap` 工具安装和使用
 
-    安装
-    ```shell
-    sudo pacman -S nmap
-    ```
+安装
 
-    使用
-    ```shell
-    sudo nmap -sS 192.168.1.0/24
-    ```
+```shell
+sudo pacman -S nmap
+```
 
-    ![](assets/raspberryPi/ip_1.png)
+使用
 
-3. 下载 [vscode](https://code.visualstudio.com/) 和 `Remote - SSH` 插件
+```shell
+sudo nmap -sS 192.168.1.0/24
+```
 
-![](assets/raspberryPi/remote-ssh.png)
+![nmap](assets/raspberryPi/ip_1.png)
 
-4. 使用vscode远程开发树莓派
+### 3. 下载 [vscode](https://code.visualstudio.com/) 和 `Remote - SSH` 插件
 
-    * 点击右侧的ssh的图标,新建连接
+![Remote - SSH 插件](assets/raspberryPi/remote-ssh.png)
 
-    ![](assets/raspberryPi/remote-ssh_1.png)
+### 4. 使用vscode远程开发树莓派
 
-    * 输入ssh指令,如下所示
+- 点击右侧的ssh的图标,新建连接
 
-    ```shell
-    ssh pi@192.168.1.112
-    ```
+![remote-ssh1](assets/raspberryPi/remote-ssh_1.png)
 
-    ![](assets/raspberryPi/remote-ssh_2.png)
+- 输入ssh指令,如下所示
 
-    * 远程链接,并输入密码(默认密码为 `raspberry`)
+```shell
+ssh pi@192.168.1.112
+```
 
-    ![](assets/raspberryPi/remote-ssh_3.png)
+![remote-ssh2](assets/raspberryPi/remote-ssh_2.png)
 
-    * 打开文件夹,就可以愉快的开发了
+- 远程链接,并输入密码(默认密码为 `raspberry`)
 
-    ![](assets/raspberryPi/remote-ssh_4.png)
+![remote-ssh3](assets/raspberryPi/remote-ssh_3.png)
 
-    ![](assets/raspberryPi/remote-ssh_5.png)
+- 打开文件夹,就可以愉快的开发了
+
+![remote-ssh4](assets/raspberryPi/remote-ssh_4.png)
+
+![remote-ssh5](assets/raspberryPi/remote-ssh_5.png)
