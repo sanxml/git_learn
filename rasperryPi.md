@@ -84,3 +84,24 @@ scan_ssid=1
 
 4. 使用vscode远程开发树莓派
 
+    * 点击右侧的ssh的图标,新建连接
+
+    ![](assets/raspberryPi/remote-ssh_1.png)
+
+    * 输入ssh指令,如下所示
+
+    ```shell
+    ssh pi@192.168.1.112
+    ```
+
+    ![](assets/raspberryPi/remote-ssh_2.png)
+
+    * 远程链接,并输入密码(默认密码为 `raspberry`)
+
+    ![](assets/raspberryPi/remote-ssh_3.png)
+
+    * 打开文件夹,就可以愉快的开发了
+
+    ![](assets/raspberryPi/remote-ssh_4.png)
+
+    ![](assets/raspberryPi/remote-ssh_5.png)
