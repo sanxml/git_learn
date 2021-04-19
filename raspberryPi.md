@@ -64,11 +64,11 @@ scan_ssid=1
 
     ![](assets/raspberryPi/ip.png)
 
-    * linux 系统使用 `nmap` 工具,这里为 manjaro 的安装和使用
+    * linux 系统使用 `nmap` 工具,这里的系统为 manjaro ,下面介绍 `nmap` 工具安装和使用
 
     安装
     ```shell
-    sudo pacman -S namp
+    sudo pacman -S nmap
     ```
 
     使用
