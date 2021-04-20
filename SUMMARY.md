@@ -16,5 +16,6 @@
         * [LED驱动开发](develop_led_driver.md)
         * [新字符设备驱动开发](develop_new_character_device_drivers.md)
 
-* 杂乱
+    * 树莓派 开发
     * [树莓派入门](raspberryPi.md)
+    * [树莓派 opencv 环境的搭建](raspberryPi_opencv.md)
