@@ -1,14 +1,15 @@
 # 树莓派4安装 ubuntu
 
 - [树莓派4安装 ubuntu](#树莓派4安装-ubuntu)
-  - [下载](#下载)
+  - [镜像下载](#镜像下载)
   - [烧录镜像](#烧录镜像)
   - [添加 wifi 设置](#添加-wifi-设置)
   - [ssh连接树莓派](#ssh连接树莓派)
   - [apt 换源](#apt-换源)
   - [vnc远程连接桌面](#vnc远程连接桌面)
 
-## 下载
+## 镜像下载
+
 到官网下载ubuntu-server镜像，[镜像链接](https://ubuntu.com/download/raspberry-pi)
 
 ![ubuntu-server 镜像](assets/raspberry_ubuntu/ubuntu_img.png)
