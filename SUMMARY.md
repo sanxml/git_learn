@@ -18,5 +18,6 @@
 
     * 树莓派 开发
         * [树莓派入门](raspberryPi.md)
+        * [树莓派4安装 ubuntu](raspberryPi_ubuntu.md)
         * [树莓派 opencv 环境的搭建](raspberryPi_opencv.md)
         * [树莓派 opencv 调用摄像头](raspberryPi_camera.md)
