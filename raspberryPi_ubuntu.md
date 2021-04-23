@@ -68,7 +68,7 @@ deb https://mirrors.ustc.edu.cn/ubuntu-ports/ focal-security main restricted uni
 
 ``` shell
 sudo apt update && sudo apt upgrade #更新 apt 包
-sudo apt ubuntu-desktop gnome-panel xorg dbus-x11 x11-xserver-utils #安装ubuntu默认桌面环境
+sudo apt install ubuntu-desktop gnome-panel xorg dbus-x11 x11-xserver-utils #安装ubuntu默认桌面环境
 sudo apt install tightvncserver #安装 tightvncserver
 vncserver   #启动vncserver
 ```
