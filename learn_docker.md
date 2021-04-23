@@ -15,7 +15,7 @@ Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级�
 - 镜像操作
 
 ```shell
-docker push [OPTIONS] NAME[:TAG]  # 获取镜像
+docker pull [OPTIONS] NAME[:TAG]  # 获取镜像
 docker images             # 列出镜像
 docker search [OPTIONS] TERM    # 查找镜像
 docker rmi [OPTIONS] IMAGE [IMAGE...] #删除镜像
