@@ -26,7 +26,7 @@ docker rmi [OPTIONS] IMAGE [IMAGE...] #删除镜像
 ```shell
 docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...] # 通过镜像启动一个新的容器
 docker ps -a # 查看所有容器
-docker docker start [OPTIONS] CONTAINER [CONTAINER...] # 启动停止的一个容器
+docker start [OPTIONS] CONTAINER [CONTAINER...] # 启动停止的一个容器
 docker stop [OPTIONS] CONTAINER [CONTAINER...] # 停止容器
 docker rm [OPTIONS] CONTAINER [CONTAINER...] # 删除容器
 ```
@@ -45,3 +45,21 @@ docker pull [OPTIONS] NAME[:TAG|@DIGEST] # 拉取镜像
 docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]] # 打包容器为镜像
 docker push [OPTIONS] NAME[:TAG] # 推送镜像
 ```
+
+## docker 安装 ubuntu
+
+```shell
+docker pull ubuntu:latest #拉取最新的镜像
+docker run -itd --name ubuntu_test ubuntu #创建名字 ubuntu_test 的新容器
+```
+
+`docker run` 的常用参数:
+
+| 参数     | 说明                                                       |
+| :------- | :--------------------------------------------------------- |
+| -a stdin | 指定标准输入输出类型，可选：-a stdin, -a stdout, -a stderr |
+| -d       | 后台运行并返回容器 ID                                      |
+| -i       | 以交互式模式运行容器,通常和 -t 一起使用                    |
+| -t       | 为容器分配一个伪输入终端,通常与 -i 一起使用                |
+| -p       | 端口映射宿主机 port : 容器 port                            |
+| --name   | 设置容器名                                                 |
