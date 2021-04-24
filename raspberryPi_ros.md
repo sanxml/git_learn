@@ -27,9 +27,11 @@
   - [rqt_console 和 roslaunch](#rqt_console-和-roslaunch)
     - [rqt_console和rqt_logger_level](#rqt_console和rqt_logger_level)
     - [roslaunch](#roslaunch)
+  - [使用 rosed 编辑文件](#使用-rosed-编辑文件)
   - [报错及解决办法](#报错及解决办法)
     - [Error: the rosdep view is empty: call 'sudo rosdep init' and 'rosdep update' 学习 ROS 时,运行 rospack depends1 XXX 报错的解决办法](#error-the-rosdep-view-is-empty-call-sudo-rosdep-init-and-rosdep-update-学习-ros-时运行-rospack-depends1-xxx-报错的解决办法)
     - [RuntimeError: No usable plot type found. Install at least one of: PyQtGraph, MatPlotLib (at least 1.4.0) or Python-Qwt5. 运行 rosrun rqt_plot rqt_plot 报错的解决办法](#runtimeerror-no-usable-plot-type-found-install-at-least-one-of-pyqtgraph-matplotlib-at-least-140-or-python-qwt5-运行-rosrun-rqt_plot-rqt_plot-报错的解决办法)
+    - [报错: 正在连接 raw.githubusercontent.com (raw.githubusercontent.com)|::|:443... 失败：拒绝连接](#报错-正在连接-rawgithubusercontentcom-rawgithubusercontentcom443-失败拒绝连接)
 
 ## ros 安装和配置ros环境
 
@@ -442,6 +444,15 @@ rqt_graph
 
 ![roslaunch_graph](assets/raspberry_ros/roslaunch_graph.png)
 
+## 使用 rosed 编辑文件
+
+rosed是rosbash套件的一部分。利用它可以直接通过软件包名编辑包中的文件，而无需键入完整路径。
+
+``` shell
+# 用法: rosed [package_name] [filename]
+rosed roscpp Logger.msg # 编辑roscpp软件包中的Logger.msg文件
+```
+
 ## 报错及解决办法
 
 ### Error: the rosdep view is empty: call 'sudo rosdep init' and 'rosdep update' 学习 ROS 时,运行 rospack depends1 XXX 报错的解决办法
@@ -530,4 +541,18 @@ updated cache in /home/ubuntu/.ros/rosdep/sources.cache
 
 ```shell
 pip install PyQtGraph
+```
+
+### 报错: 正在连接 raw.githubusercontent.com (raw.githubusercontent.com)|::|:443... 失败：拒绝连接
+
+打开[链接](https://www.ipaddress.com/), 查找 raw.githubusercontent.com 的 ip 地址, 并添加到 /etc/hosts 文件下
+
+```shell
+sudo vim /etc/hosts
+```
+
+文件末尾添加以下内容
+
+``` shell
+185.199.108.133  raw.githubusercontent.com
 ```
