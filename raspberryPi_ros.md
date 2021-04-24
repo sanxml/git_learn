@@ -21,6 +21,12 @@
     - [rqt_graph](#rqt_graph)
     - [rostopic](#rostopic)
     - [rqt_plot](#rqt_plot)
+  - [ros 服务](#ros-服务)
+    - [rosseervice](#rosseervice)
+    - [rosparam](#rosparam)
+  - [rqt_console 和 roslaunch](#rqt_console-和-roslaunch)
+    - [rqt_console和rqt_logger_level](#rqt_console和rqt_logger_level)
+    - [roslaunch](#roslaunch)
   - [报错及解决办法](#报错及解决办法)
     - [Error: the rosdep view is empty: call 'sudo rosdep init' and 'rosdep update' 学习 ROS 时,运行 rospack depends1 XXX 报错的解决办法](#error-the-rosdep-view-is-empty-call-sudo-rosdep-init-and-rosdep-update-学习-ros-时运行-rospack-depends1-xxx-报错的解决办法)
     - [RuntimeError: No usable plot type found. Install at least one of: PyQtGraph, MatPlotLib (at least 1.4.0) or Python-Qwt5. 运行 rosrun rqt_plot rqt_plot 报错的解决办法](#runtimeerror-no-usable-plot-type-found-install-at-least-one-of-pyqtgraph-matplotlib-at-least-140-or-python-qwt5-运行-rosrun-rqt_plot-rqt_plot-报错的解决办法)
@@ -216,61 +222,64 @@ rosrun rqt_graph rqt_graph
 
 rostopic命令工具能让你获取ROS话题的信息
 
-```shell
-rostopic echo /turtle1/cmd_vel # 显示在某个话题上发布的数据。
-```
+- rostopic echo 可以显示在某个话题上发布的数据。
 
-通过按下键盘方向键让 turtle_teleop_key 节点发布数据,控制乌龟的运动,可以在 rostopic 的终端窗口捕获到运动信息
+  ```shell
+  # 用法: rostopic echo [topic]
+  rostopic echo /turtle1/cmd_vel # 显示在某个话题上发布的数据。
+  ```
 
-![rostopic_echo](assets/raspberry_ros/rostopic_echo.png)
+  通过按下键盘方向键让 turtle_teleop_key 节点发布数据,控制乌龟的运动,可以在 rostopic 的终端窗口捕获到运动信息
 
-现在让我们再看一下rqt_graph
+  ![rostopic_echo](assets/raspberry_ros/rostopic_echo.png)
 
-![rostopic_echo_graph](assets/raspberry_ros/rostopic_echo_graph.png)
+  现在让我们再看一下rqt_graph
 
-rostopic list 能够列出当前已被订阅和发布的所有话题。
+  ![rostopic_echo_graph](assets/raspberry_ros/rostopic_echo_graph.png)
 
-```shell
-rostopic list -v # 列出所有发布和订阅的主题及其类型的详细信息。
-```
+- rostopic list 能够列出当前已被订阅和发布的所有话题。
 
-rostopic type 命令用来查看所发布话题的消息类型。
+  ```shell
+  rostopic list -v # 列出所有发布和订阅的主题及其类型的详细信息。
+  ```
 
-```shell
-rostopic type /turtle1/cmd_vel
-rosmsg show geometry_msgs/Twist # rosmsg查看消息的详细信息
-```
+- rostopic type 命令用来查看所发布话题的消息类型。
 
-rostopic pub 可以把数据发布到当前某个正在广播的话题上。
+  ```shell
+  rostopic type /turtle1/cmd_vel
+  rosmsg show geometry_msgs/Twist # rosmsg查看消息的详细信息
+  ```
 
-```shell
-# 用法: rostopic pub [topic] [msg_type] [args]
-# 发送一条消息给turtlesim，告诉它以2.0大小的线速度和1.8大小的角速度移动。
-rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
-```
+- rostopic pub 可以把数据发布到当前某个正在广播的话题上。
 
-参数分析: `-1` 让rostopic只发布一条消息，然后退出. 两个破折号 `--` 用来告诉选项解析器，表明之后的参数都不是选项
+  ```shell
+  # 用法: rostopic pub [topic] [msg_type] [args]
+  # 发送一条消息给turtlesim，告诉它以2.0大小的线速度和1.8大小的角速度移动。
+  rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
+  ```
 
-![rostopic_pub](assets/raspberry_ros/rostopic_pub.png)
+  参数分析: `-1` 让rostopic只发布一条消息，然后退出. 两个破折号 `--` 用来告诉选项解析器，表明之后的参数都不是选项
 
-```shell
-rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'
-```
+  ![rostopic_pub](assets/raspberry_ros/rostopic_pub.png)
 
-rostopic pub -r 命令来发布源源不断的命令, 这里的 `1` 代表以 1 Hz 的速度发布
+  ```shell
+  rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'
+  ```
 
-![rostopic_pub1](assets/raspberry_ros/rostopic_pub1.png)
+  rostopic pub -r 命令来发布源源不断的命令, 这里的 `1` 代表以 1 Hz 的速度发布
 
-我们再看一下rqt_graph,可以看出键盘和 `rostopic pub` 都在发送指令给小乌龟和 `rostopic echo` .
+  ![rostopic_pub1](assets/raspberry_ros/rostopic_pub1.png)
 
-![rostopic_pub_graph](assets/raspberry_ros/rostopic_pub_graph.png)
+  我们再看一下rqt_graph,可以看出键盘和 `rostopic pub` 都在发送指令给小乌龟和 `rostopic echo` .
 
-rostopic hz 报告数据发布的速率。
+  ![rostopic_pub_graph](assets/raspberry_ros/rostopic_pub_graph.png)
 
-```shell
-# 用法: rostopic hz [topic]
-rostopic hz /turtle1/pose
-```
+- rostopic hz 报告数据发布的速率。
+
+  ```shell
+  # 用法: rostopic hz [topic]
+  rostopic hz /turtle1/pose
+  ```
 
 ### rqt_plot
 
@@ -283,6 +292,155 @@ rosrun rqt_plot rqt_plot
 在弹出的窗口文本框添加 `/turtle1/pose/x`, 点击 `+` 后, 再添加 `/turtle1/pose/y`, 现在你会在图中看到小乌龟的 x 和 y 位置.
 
 ![rqt_plot](assets/raspberry_ros/rqt_plot.png)
+
+## ros 服务
+
+服务（Services）是节点之间通讯的另一种方式。服务允许节点发送一个请求（request）并获得一个响应（response）
+
+### rosseervice
+
+rosservice可以很容易地通过服务附加到ROS客户端/服务器框架上。rosservice有许多可用于服务的命令，用法：
+
+| 指令            | 说明                 |
+| :-------------- | :------------------- |
+| rosservice list | 输出活跃服务的信息   |
+| rosservice call | 用给定的参数调用服务 |
+| rosservice type | 输出服务的类型       |
+| rosservice find | 按服务的类型查找服务 |
+| rosservice uri  | 输出服务的ROSRPC uri |
+
+``` shell
+rosservice list
+```
+
+list命令显示turtlesim节点提供了9个服务：reset, clear, spawn, kill, turtle1/set_pen, /turtle1/teleport_absolute, /turtle1/teleport_relative, turtlesim/get_loggers, turtlesim/set_logger_level。同时还有两个与rosout节点有关的服务：/rosout/get_loggers和/rosout/set_logger_level。
+
+``` shell
+# 用法 : rosservice type [service]
+rosservice type /clear # 查看clear服务的类型
+rosservice type /spawn| rossrv show # 查看spawn服务的详细信息
+```
+
+rosservice type 可以输出服务的类型, 看到 `/clear` 服务的类型为 empty（空），这表明调用这个服务时不需要参数.
+
+``` shell
+# 用法 : rosservice call [service] [args]
+rosservice call /clear # 调用clear服务
+rosservice call /spawm 2 2 0.2 "" # 给定的位置和角度生成一只新的乌龟
+```
+
+调用 `/clear` 服务, 清除了小乌龟运动的轨迹
+
+![rosservice_call_clear](assets/raspberry_ros/rosservice_call_clear.png)
+
+调用 `/spawn` 服务, 并设置好参数,生成一只新的乌龟
+
+![rosservice_call_spawn](assets/raspberry_ros/rosservice_call_spawn.png)
+
+### rosparam
+
+rosparam能让我们在ROS参数服务器（Parameter Server）上存储和操作数据。参数服务器能够存储整型（integer）、浮点（float）、布尔（boolean）、字典（dictionaries）和列表（list）等数据类型。rosparam使用YAML标记语言的语法。
+
+| 指令            | 说明             |
+| :-------------- | :--------------- |
+| rosparam set    | 设置参数         |
+| rosparam get    | 获取参数         |
+| rosparam load   | 从文件中加载参数 |
+| rosparam dump   | 向文件中转储参数 |
+| rosparam delete | 删除参数         |
+| rosparam list   | 列出参数名       |
+
+``` shell
+rosparam list # 查看参数名
+rosparam set /background_b 150  # 修改背景色的红色通道的值
+rosservice call /clear # 调用clear服务生效参数修改
+rosparam get /background_g # 获取背景的绿色通道的值
+rosparam dump params.yaml # 将所有的参数写入params.yaml文件
+# 将yaml文件重载入新的命名空间
+rosparam load params.yaml copy_turtle
+rosparam get /copy_turtle/background_b
+```
+
+## rqt_console 和 roslaunch
+
+### rqt_console和rqt_logger_level
+
+rqt_console 连接到了 ros 的日志框架，以显示节点的输出信息。rqt_logger_level 允许我们在节点运行时改变输出信息的详细级别，包括 Debug 、 Info 、 Warn 和 Error 。
+
+```shell
+rosrun rqt_console rqt_console
+rosrun rqt_logger_level rqt_logger_level
+```
+
+日志级别的优先级按以下顺序排列：
+
+- Fatal （致命）
+- Error （错误）
+- Warn  （警告）
+- Info  （信息）
+- Debug （调试）
+
+Fatal是最高优先级，Debug是最低优先级。通过设置日志级别，你可以获得所有优先级级别，或只是更高级别的消息。比如，将日志级别设为Warn时，你会得到Warn、Error和Fatal这三个等级的日志消息。
+
+### roslaunch
+
+roslaunch可以用来启动定义在launch（启动）文件中的节点。
+
+用法: roslaunch [package] [filename.launch]
+
+在之前创建的 beginner_tutorials 软件包目录下
+
+```shell
+roscd beginner_tutorials # 进入 beginner_tutorials 软件包目录
+mkdir launch
+cd launch
+vim turtlemimic.launch
+```
+
+在 turtlemimic.launch 文件中添加以下内容
+
+```xml
+<launch>
+
+<!-- 此处我们创建了两个分组，并以命名空间（namespace）标签来区分，其中一个名为turtulesim1，另一个名为turtlesim2，两个分组中都有相同的名为sim的turtlesim节点。这样可以让我们同时启动两个turtlesim模拟器，而不会产生命名冲突。 -->
+  <group ns="turtlesim1">
+    <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+  </group>
+
+  <group ns="turtlesim2">
+    <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+  </group>
+
+<!-- 在这里我们启动模仿节点，话题的输入和输出分别重命名为turtlesim1和turtlesim2，这样就可以让turtlesim2模仿turtlesim1了。 -->
+  <node pkg="turtlesim" name="mimic" type="mimic">
+    <remap from="input" to="turtlesim1/turtle1"/>
+    <remap from="output" to="turtlesim2/turtle1"/>
+  </node>
+
+</launch>
+```
+
+通过roslaunch命令来运行launch文件
+
+```shell
+roslaunch beginner_tutorials turtlemimic.launch
+```
+
+新建一个终端发送以下指令,看到两个turtlesims同时开始移动，虽然发布命令只发送给了turtlesim1。
+
+```shell
+rostopic pub /turtlesim1/turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'
+```
+
+![roslaunch](assets/raspberry_ros/roslaunch.png)
+
+打开 rqt_graph 查看过程
+
+```shell
+rqt_graph
+```
+
+![roslaunch_graph](assets/raspberry_ros/roslaunch_graph.png)
 
 ## 报错及解决办法
 
