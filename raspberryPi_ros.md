@@ -10,8 +10,20 @@
     - [创建 ros 软件包](#创建-ros-软件包)
     - [编译 ros 软件包](#编译-ros-软件包)
     - [依赖关系](#依赖关系)
+  - [ros 节点](#ros-节点)
+    - [图概念速览](#图概念速览)
+    - [节点](#节点)
+    - [客户端库](#客户端库)
+    - [roscore](#roscore)
+    - [rosnode](#rosnode)
+    - [rosrun](#rosrun)
+  - [ros 话题](#ros-话题)
+    - [rqt_graph](#rqt_graph)
+    - [rostopic](#rostopic)
+    - [rqt_plot](#rqt_plot)
   - [报错及解决办法](#报错及解决办法)
     - [Error: the rosdep view is empty: call 'sudo rosdep init' and 'rosdep update' 学习 ROS 时,运行 rospack depends1 XXX 报错的解决办法](#error-the-rosdep-view-is-empty-call-sudo-rosdep-init-and-rosdep-update-学习-ros-时运行-rospack-depends1-xxx-报错的解决办法)
+    - [RuntimeError: No usable plot type found. Install at least one of: PyQtGraph, MatPlotLib (at least 1.4.0) or Python-Qwt5. 运行 rosrun rqt_plot rqt_plot 报错的解决办法](#runtimeerror-no-usable-plot-type-found-install-at-least-one-of-pyqtgraph-matplotlib-at-least-140-or-python-qwt5-运行-rosrun-rqt_plot-rqt_plot-报错的解决办法)
 
 ## ros 安装和配置ros环境
 
@@ -20,9 +32,9 @@
 这里使用树莓派4, 安装前需要安装 ubuntu 系统, 使用 apt 安装 ros Noetic Ninjemys
 
 ```shell
-sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' #设置sources.list以安装来自packages.ros.org的软件
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' # 设置sources.list以安装来自packages.ros.org的软件
 sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 # 设置密钥
-sudo apt update #更新软件包
+sudo apt update # 更新软件包
 sudo apt install ros-noetic-desktop-full # 完整桌面版安装
 ```
 
@@ -30,7 +42,7 @@ sudo apt install ros-noetic-desktop-full # 完整桌面版安装
 
 ```shell
 source /opt/ros/noetic/setup.bash # 环境设置
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc #每次打开激活脚本
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc # 每次打开激活脚本
 source ~/.bashrc
 printenv | grep ROS # 检查环境是否安装完成
 ```
@@ -84,7 +96,7 @@ echo $ROS_PACKAGE_PATH
 使用 `catkin_create_pkg` 命令创建一个名为 beginner_tutorials 的新软件包，这个软件包依赖于 std_msgs、roscpp 和 rospy
 
 ``` shell
-cd ~/catkin_ws/src #进入 catkin 工作空间源文件目录
+cd ~/catkin_ws/src # 进入 catkin 工作空间源文件目录
 # catkin_create_pkg <package_name> [depend1] [depend2] [depend3]
 catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
 ```
@@ -96,11 +108,11 @@ catkin_make 是一个命令行工具，它简化了标准catkin工作流程。�
 接着前面的,现在开始构建软件包
 
 ```shell
-cd ~/catkin_ws #查看这些一级依赖包
-ls src #可以看到现在目录下有名为beginner_tutorials的目录,使用catkin_make来构建它.
+cd ~/catkin_ws # 查看这些一级依赖包
+ls src # 可以看到现在目录下有名为beginner_tutorials的目录,使用catkin_make来构建它.
 # catkin_make [make_targets] [-DCMAKE_VARIABLES=...]
-catkin_make #在catkin工作区中构建软件包
-source ~/catkin_ws/devel/setup.bash #激活配置文件
+catkin_make # 在catkin工作区中构建软件包
+source ~/catkin_ws/devel/setup.bash # 激活配置文件
 ```
 
 构建结束后,可以看到 `beginner_tutorials` 目录下新建几个文件
@@ -110,9 +122,167 @@ source ~/catkin_ws/devel/setup.bash #激活配置文件
 我们可以使用 `rospack` 命令工具查看软件包的依赖关系,依赖关系存储在 `package.xml` 文件
 
 ```shell
-rospack depends1 beginner_tutorials #查看这些一级依赖包
-rospack depends beginner_tutorials #递归检测出所有嵌套的依赖包
+rospack depends1 beginner_tutorials # 查看这些一级依赖包
+rospack depends beginner_tutorials # 递归检测出所有嵌套的依赖包
 ```
+
+## ros 节点
+
+### 图概念速览
+
+计算图（Computation Graph）是一个由 ros 进程组成的点对点网络，它们能够共同处理数据。ros 的基本计算图概念有节点（Nodes）、主节点（Master）、参数服务器（Parameter Server）、消息（Messages）、服务（Services）、话题（Topics）和袋（Bags），它们都以不同的方式向图（Graph）提供数据。
+
+| 概念             | 说明                                                        |
+| :--------------- | :---------------------------------------------------------- |
+| 节点（Nodes）    | 节点是一个可执行文件，它可以通过 ros 来与其他节点进行通信。 |
+| 消息（Messages） | 订阅或发布话题时所使用的 ros 数据类型。                     |
+| 话题（Topics）   | 节点可以将消息发布到话题，或通过订阅话题来接收消息。        |
+| 主节点（Master） | ros 的命名服务，例如帮助节点发现彼此。                      |
+| rosout           | 在 ros 中相当于stdout/stderr（标准输出/标准错误）。         |
+| roscore          | 主节点 + rosout + 参数服务器                                |
+
+### 节点
+
+节点实际上只不过是ROS软件包中的一个可执行文件。ROS节点使用ROS客户端库与其他节点通信。节点可以发布或订阅话题，也可以提供或使用服务。
+
+### 客户端库
+
+ROS客户端库可以让用不同编程语言编写的节点进行相互通信：
+
+- rospy = python 客户端库
+- roscpp = c++ 客户端库
+- rosjs = javascripts客户端库
+- rosjava = java客户端库
+
+### roscore
+
+roscore是你在运行所有ROS程序前首先要运行的命令。
+
+```shell
+roscore
+```
+
+> 如果roscore运行后没有初始化，很有可能是网络配置的问题
+
+### rosnode
+
+rosnode 显示当前正在运行的ROS节点信息。
+
+```shell
+rosnode list # 列出运行的节点
+rosnode info /rosout # 返回的是某个指定节点的信息
+rosnode ping /rosout # 测试节点是否正常
+```
+
+### rosrun
+
+rosrun 可以让你用包名直接运行软件包内的节点（而不需要知道包的路径）。
+
+```shell
+# rosrun [package_name] [node_name]
+rosrun turtlesim turtlesim_node
+rosrun turtlesim turtlesim_node __name:=my_turtle # 重新命名节点
+```
+
+![turtlesim_node](./assets/raspberry_ros/turtlesim.png)
+
+## ros 话题
+
+接着前一节,先做一些准备工作
+
+```shell
+# 新建终端,执行
+rosrun turtlesim turtlesim_node
+# 新建终端,执行
+rosrun turtlesim turtle_teleop_key # 通过键盘遥控turtle
+```
+
+turtlesim_node节点和turtle_teleop_key节点之间是通过一个ROS话题来相互通信的。turtle_teleop_key在话题上发布键盘按下的消息，turtlesim则订阅该话题以接收消息。
+
+![turtle_teleop_key](./assets/raspberry_ros/turtlesim_and_key.png)
+
+### rqt_graph
+
+rqt_graph用动态的图显示了系统中正在发生的事情。
+
+```shell
+# 新建终端,执行
+rosrun rqt_graph rqt_graph
+```
+
+![rqt_graph](assets/raspberry_ros/rqt_graph.png)
+
+### rostopic
+
+rostopic命令工具能让你获取ROS话题的信息
+
+```shell
+rostopic echo /turtle1/cmd_vel # 显示在某个话题上发布的数据。
+```
+
+通过按下键盘方向键让 turtle_teleop_key 节点发布数据,控制乌龟的运动,可以在 rostopic 的终端窗口捕获到运动信息
+
+![rostopic_echo](assets/raspberry_ros/rostopic_echo.png)
+
+现在让我们再看一下rqt_graph
+
+![rostopic_echo_graph](assets/raspberry_ros/rostopic_echo_graph.png)
+
+rostopic list 能够列出当前已被订阅和发布的所有话题。
+
+```shell
+rostopic list -v # 列出所有发布和订阅的主题及其类型的详细信息。
+```
+
+rostopic type 命令用来查看所发布话题的消息类型。
+
+```shell
+rostopic type /turtle1/cmd_vel
+rosmsg show geometry_msgs/Twist # rosmsg查看消息的详细信息
+```
+
+rostopic pub 可以把数据发布到当前某个正在广播的话题上。
+
+```shell
+# 用法: rostopic pub [topic] [msg_type] [args]
+# 发送一条消息给turtlesim，告诉它以2.0大小的线速度和1.8大小的角速度移动。
+rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
+```
+
+参数分析: `-1` 让rostopic只发布一条消息，然后退出. 两个破折号 `--` 用来告诉选项解析器，表明之后的参数都不是选项
+
+![rostopic_pub](assets/raspberry_ros/rostopic_pub.png)
+
+```shell
+rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'
+```
+
+rostopic pub -r 命令来发布源源不断的命令, 这里的 `1` 代表以 1 Hz 的速度发布
+
+![rostopic_pub1](assets/raspberry_ros/rostopic_pub1.png)
+
+我们再看一下rqt_graph,可以看出键盘和 `rostopic pub` 都在发送指令给小乌龟和 `rostopic echo` .
+
+![rostopic_pub_graph](assets/raspberry_ros/rostopic_pub_graph.png)
+
+rostopic hz 报告数据发布的速率。
+
+```shell
+# 用法: rostopic hz [topic]
+rostopic hz /turtle1/pose
+```
+
+### rqt_plot
+
+rqt_plot 命令可以在滚动时间图上显示发布到某个话题上的数据, 新建终端输入:
+
+```shell
+rosrun rqt_plot rqt_plot
+```
+
+在弹出的窗口文本框添加 `/turtle1/pose/x`, 点击 `+` 后, 再添加 `/turtle1/pose/y`, 现在你会在图中看到小乌龟的 x 和 y 位置.
+
+![rqt_plot](assets/raspberry_ros/rqt_plot.png)
 
 ## 报错及解决办法
 
@@ -196,4 +366,10 @@ Add distro "melodic"
 Add distro "noetic"
 Add distro "rolling"
 updated cache in /home/ubuntu/.ros/rosdep/sources.cache
+```
+
+### RuntimeError: No usable plot type found. Install at least one of: PyQtGraph, MatPlotLib (at least 1.4.0) or Python-Qwt5. 运行 rosrun rqt_plot rqt_plot 报错的解决办法
+
+```shell
+pip install PyQtGraph
 ```
